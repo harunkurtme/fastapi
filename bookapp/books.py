@@ -1,3 +1,5 @@
+from typing import Optional
+from unittest import skip
 from fastapi import FastAPI
 from enum import Enum
 
@@ -53,7 +55,18 @@ async def read_book(book_name:str):
     return BOOKS[book_name]
 
 @app.get("/{book_name}")
-async def skip_book(skip_book:str="book_3"):
+async def skip_book(skip_book:str="book_3"): 
     new_books=BOOKS.copy()
     del new_books[skip_book]
     return new_books
+
+# this function optinal call from books
+#if you add a string value from boooks 
+# and operating to delete
+@app.get("/{book_name}")
+async def optinalCallBook(skip_book:Optional[str]=None):
+    if skip_book: 
+        new_books=BOOKS.copy()
+        del new_books[skip_book]
+        return new_books
+    return BOOKS
