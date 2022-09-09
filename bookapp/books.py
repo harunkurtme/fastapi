@@ -17,11 +17,15 @@ BOOKS = {
 async def read_all_books():
     return BOOKS
 
+@app.get("/books/mybook")
+async def read_favorite_book():
+        return {"my_favorite_book":"My favorite Book"}
+
 @app.get("/books/{book_title}")
 async def read_book(book_title):
     return {"book_title":book_title}
 
 
 @app.get("/books/{book_id}")
-async def read_book_id(book_id:int):
+async def read_book_id(book_id:int): #book_id must be int
     return {"book_title":book_id}
