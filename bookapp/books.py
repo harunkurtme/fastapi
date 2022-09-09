@@ -88,7 +88,7 @@ async def create_book(book_title,book_author):
     return BOOKS[f'book_{current_book_id+1}']
 
 #this funciton update from BOOKS at come to book_name
-@app.update("/{book_name}"):
+@app.update("/{book_name}")
 async def update_book(book_name:str,book_title:str,book_author:str):
     
     book_information = {'title':book_title,'author':book_author}
@@ -100,6 +100,7 @@ async def delete_book(book_name):
     del BOOKS[book_name]
     return f'Book_{book_name} deleted.'
 
+# book parameters from new function and with last '/'
 @app.get('/assigment/')
 async def read_book_assigment(book_name:str):
     return BOOKS[book_name]
