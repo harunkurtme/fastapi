@@ -99,3 +99,12 @@ async def update_book(book_name:str,book_title:str,book_author:str):
 async def delete_book(book_name):
     del BOOKS[book_name]
     return f'Book_{book_name} deleted.'
+
+@app.get('/assigment/')
+async def read_book_assigment(book_name:str):
+    return BOOKS[book_name]
+
+@app.delete('/assigment/')
+async def delete_book_assingment(book_name:str):
+    del BOOKS[book_name]
+    return BOOKS
