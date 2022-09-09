@@ -30,7 +30,7 @@ async def read_book_id(book_id:int): #book_id must be int
     return {"book_title":book_id}
 
 
-class DirectionName(str,Enum):
+class DirectionName(str,Enum): #Enum Model
     north="North"
     south="Sout"
     east="East"
@@ -46,4 +46,14 @@ async def get_direction(direction_name:DirectionName): #must_Be directionName cl
         return {"Direciton":direction_name,"sub":"Left"}
     if direction_name==DirectionName.east:
         return {"Direciton":direction_name,"sub":"Right"}
-    
+
+
+@app.get("/{book_name}")
+async def read_book(book_name:str):
+    return BOOKS[book_name]
+
+@app.get("/{book_name}")
+async def skip_book(skip_book:str="book_3"):
+    new_books=BOOKS.copy()
+    del new_books[skip_book]
+    return new_books
