@@ -15,4 +15,13 @@ BOOKS = {
 
 @app.get("/")
 async def read_all_books():
-    return {"messeage":"Helo First API"}
+    return BOOKS
+
+@app.get("/books/{book_title}")
+async def read_book(book_title):
+    return {"book_title":book_title}
+
+
+@app.get("/books/{book_id}")
+async def read_book_id(book_id:int):
+    return {"book_title":book_id}
