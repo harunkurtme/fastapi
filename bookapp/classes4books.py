@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel,Field
 from uuid import UUID
 
+from typing import Optional
+
 """
 _summary_
 get/ all boks
@@ -17,7 +19,11 @@ class Book(BaseModel):
     id: UUID
     title:str = Field(min_length=1) #must be one character for title
     author: str 
-    description:str
+    description:OptOptionalinal[str]=Field(title="Description of the book", #field want to max lenth 100 
+                          #min length 1
+                          max_length=100,
+                          min_length=1
+                          )
     rating:int
     
 
