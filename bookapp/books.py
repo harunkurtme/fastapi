@@ -71,6 +71,9 @@ async def optinalCallBook(skip_book:Optional[str]=None):
         return new_books
     return BOOKS
 
+# required book_title and book_author 
+# for create  new book 
+#this method make a book from zero 
 @app.post("/")
 async def create_book(book_title,book_author):
     current_book_id=0
@@ -83,3 +86,11 @@ async def create_book(book_title,book_author):
     BOOKS[f'book_{current_book_id+1}']={'title':book_title,'author':book_author}
     
     return BOOKS[f'book_{current_book_id+1}']
+
+#this funciton update from BOOKS at come to book_name
+@app.update("/{book_name}"):
+async def update_book(book_name:str,book_title:str,book_author:str):
+    
+    book_information = {'title':book_title,'author':book_author}
+    BOOKS[book_name]=book_information
+    return book_information
