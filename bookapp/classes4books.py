@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel,Field
 from uuid import UUID
 
 """
@@ -15,8 +15,8 @@ we create BASEMODEL with class
 
 class Book(BaseModel):
     id: UUID
-    title:str
-    author: str
+    title:str = Field(min_length=1) #must be one character for title
+    author: str 
     description:str
     rating:int
     
