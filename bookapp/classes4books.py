@@ -13,18 +13,24 @@ post / create new book
 delete / book uuid specific book
 
 we create BASEMODEL with class
+Optinal library null saffety with field
+
 """
 
 class Book(BaseModel):
     id: UUID
     title:str = Field(min_length=1) #must be one character for title
     author: str 
-    description:OptOptionalinal[str]=Field(title="Description of the book", #field want to max lenth 100 
+    #optinal is use supply nullsaffety from typing library
+    #dynamic validation thanks to optional library
+    description:Optional[str]=Field(title="Description of the book", #field want to max lenth 100 
                           #min length 1
                           max_length=100,
                           min_length=1
                           )
-    rating:int
+    #rating is not greatdown and lastdown 102
+    #must be rating at 0 and 100
+    rating:int= Field(gt=-1,lt=101)
     
 
 app =FastAPI()
