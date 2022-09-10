@@ -30,6 +30,20 @@ class NegativeNumberException(Exception):
         # super(NegativeNumberException, self).__init__(*args))
         self.books_to_return=books_to_return
 
+class BookNoRating(BaseModel):
+    id: UUID
+    title:str = Field(min_length=1) #must be one character for title
+    author: str 
+    #optinal is use supply nullsaffety from typing library
+    #dynamic validation thanks to optional library
+    description:Optional[str]=Field(title="Description of the book", #field want to max lenth 100 
+                          #min length 1
+                          max_length=100,
+                          min_length=1
+                          )
+    #rating is not greatdown and lastdown 102
+    #must be rating at 0 and 100
+
 class Book(BaseModel):
     id: UUID
     title:str = Field(min_length=1) #must be one character for title
@@ -128,6 +142,14 @@ async def read_book(book_id:UUID):
         if x.id==book_id:
             return x
 
+#this function response model at our classes        
+@app.get("/book/rating/{book_id}",response_model=BookNoRating)
+async def read_book(book_id:UUID):
+    for x in BOOKS:
+        if x.id==book_id:
+            return x
+    raise raise_item_cannot_be_found_exception()
+    
 @app.post('/')
 async def create_book(book:Book):
     BOOKS.append(book)
