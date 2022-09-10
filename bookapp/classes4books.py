@@ -102,9 +102,20 @@ async def read_all_books(books_to_return: Optional[int]=None):
 async def read_book(book_id:UUID):
     for x in BOOKS:
         if x.id==book_id:
-            
+            return x
 
 @app.post('/')
 async def create_book(book:Book):
     BOOKS.append(book)
     return book
+
+#changed with uuid 
+#as book_id with update
+@app.put("/{book_id}")
+async def update_book(book_id:UUID,book:Book):
+    counter =0
+    for x in BOOKS:
+        counter +=1
+        if x.id==book_id:
+            BOOKS[counter-1]=book
+            return BOOKS[counter-1]
