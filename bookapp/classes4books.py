@@ -32,6 +32,19 @@ class Book(BaseModel):
     #must be rating at 0 and 100
     rating:int= Field(gt=-1,lt=101)
     
+    #base model for description on the our api some information at
+    #get, post or delete method
+    class Config:
+        schema_extra={
+            "example":{
+                "id":"uuid",
+                "title":"for title",
+                "author":"str",
+                "description":"desc",
+                "rating":75
+                
+            }
+        }
 
 app =FastAPI()
 BOOKS=[]
