@@ -139,4 +139,12 @@ async def delete_book(book_id:UUID):
                                 "Nothing to bee seen at the uuid."
                             }
                         )
-        
+def raise_item_cannot_be_found_exception():
+    return HTTPException(
+        status_code=404,
+        detail="book not found",
+        headers={
+            "X-header-Error":
+                "nothing to bee seen at the uuid"
+        }
+    )
