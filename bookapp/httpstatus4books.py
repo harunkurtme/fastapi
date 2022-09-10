@@ -118,6 +118,15 @@ async def negative_number_exception_handler(request:Request,
 async def read_book(username:str=Form(),password:str=Form()):
     return {"username":username,"password":password}
 
+
+
+
+@app.post("/books/login")
+async def read_book(book_id:int,username:Optional[str]=Header(None),password:Optional[str]=Header(None)):
+    if username=='FastAPIUser' and password=="test1234!":
+        return {"username":username,"password":password}
+
+
 @app.get("/header")
 async def reader_header(random_header :Optional[str]=Header[None]):
     return {"Random-Header":random_header}
