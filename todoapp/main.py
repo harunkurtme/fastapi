@@ -74,7 +74,20 @@ async def update_todo(todo_id:int,todo:Todo,db:Session=Depends(get_db)):
         "status":201,
         "transaction":"Successful"
     }
-
+@app.delete("/{todo_id}}")
+async def delete_todo(todo_id:int,db:Session=Depends(get_db))):
+    todo_model=db.query(models.Todos).filter(models.Todos.id==todo_id).first
+    if todo_model is None:
+        raise http_exception()
+    
+    db.query(models.Todos.id).filter(models.Todos.id==todo_id).delete()
+    db.commit()
+    
+    return{
+        "status":201,
+        "transaction":"Successful"
+    }
+    
 #http exception function
 #if we take it mistake value from person 
 #we showing with http_exception func
