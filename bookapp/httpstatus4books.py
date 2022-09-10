@@ -1,3 +1,4 @@
+from email import header
 from http.client import HTTPException
 from fastapi import FastAPI
 from pydantic import BaseModel,Field
@@ -132,5 +133,10 @@ async def delete_book(book_id:UUID):
     
     #not found a value from books
     #we must be teach our api
-    raise HTTPException(status_code=404,detail="book not found id")
+    raise HTTPException(status_code=404,detail="book not found id",
+                        headers={
+                            "X-Herader-Error":
+                                "Nothing to bee seen at the uuid."
+                            }
+                        )
         
