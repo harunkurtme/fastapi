@@ -1,7 +1,7 @@
 from email import header
-from http.client import HTTPException
+# from http.client import 
 from urllib.request import Request
-from fastapi import FastAPI
+from fastapi import FastAPI,HTTPException,status
 from pydantic import BaseModel,Field
 from uuid import UUID
 
@@ -150,7 +150,7 @@ async def read_book(book_id:UUID):
             return x
     raise raise_item_cannot_be_found_exception()
     
-@app.post('/')
+@app.post('/',status_code=status.HTTP_201_CREATED)
 async def create_book(book:Book):
     BOOKS.append(book)
     return book
