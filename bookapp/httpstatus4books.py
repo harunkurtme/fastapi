@@ -1,3 +1,4 @@
+from http.client import HTTPException
 from fastapi import FastAPI
 from pydantic import BaseModel,Field
 from uuid import UUID
@@ -128,4 +129,8 @@ async def delete_book(book_id:UUID):
         if x.id==book_id:
             del BOOKS[counter-1]
             return f"id : {book_id} deleted."
+    
+    #not found a value from books
+    #we must be teach our api
+    raise HTTPException(status_code=404,detail="book not found id")
         
