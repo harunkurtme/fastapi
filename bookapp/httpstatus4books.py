@@ -102,6 +102,10 @@ async def negative_number_exception_handler(request:Request,
 @app.get("/")
 async def read_all_books(books_to_return: Optional[int]=None):
     
+    #this methos is showing our mistakes at value
+    #thanks to raise we launchexception fuction with fastapi
+    if books_to_return and books_to_return<0:
+        raise NegativeNumberException(books_to_return=books_to_return)
     # this is book length not make 
     # maked a lots books
     if len(BOOKS)<1:
