@@ -1,7 +1,7 @@
 from email import header
 # from http.client import 
 from urllib.request import Request
-from fastapi import FastAPI,HTTPException,status,Form
+from fastapi import FastAPI,HTTPException,status,Form,Header
 from pydantic import BaseModel,Field
 from uuid import UUID
 
@@ -117,6 +117,10 @@ async def negative_number_exception_handler(request:Request,
 @app.post("/book/login")
 async def read_book(username:str=Form(),password:str=Form()):
     return {"username":username,"password":password}
+
+@app.get("/header")
+async def reader_header(random_header :Optional[str]=Header[None]):
+    return {"Random-Header":random_header}
 
 @app.get("/")
 async def read_all_books(books_to_return: Optional[int]=None):
